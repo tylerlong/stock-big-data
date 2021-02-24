@@ -5,7 +5,8 @@
     "start": "ts-node src/index.ts"
   },
   "dependencies": {
-    "puppeteer": "^7.1.0"
+    "puppeteer": "^7.1.0",
+    "wait-for-async": "^0.5.0"
   },
   "devDependencies": {
     "@types/node": "^14.14.31",
