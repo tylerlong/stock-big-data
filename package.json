@@ -2,7 +2,7 @@
   "license": "All Rights Reserved",
   "private": true,
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "fetch": "ts-node src/fetch.ts"
   },
   "dependencies": {
     "puppeteer": "^7.1.0",
