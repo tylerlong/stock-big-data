@@ -1,8 +1,9 @@
-import * as puppeteer from 'puppeteer';
-import * as fs from 'fs';
+import puppeteer from 'puppeteer';
+import fs from 'fs';
 import waitFor from 'wait-for-async';
-import * as os from 'os';
-import * as path from 'path';
+import os from 'os';
+import path from 'path';
+import symbols from '../symbols.json';
 
 const download = async (page: puppeteer.Page, symbol: string) => {
   const downloadButtonSelector = `a[download="${symbol}.csv"]`;
@@ -29,10 +30,8 @@ const download = async (page: puppeteer.Page, symbol: string) => {
 (async () => {
   let browser = await puppeteer.launch({headless: false});
   let page = await browser.newPage();
-  const data = fs.readFileSync('./symbols.csv', 'utf-8');
   let index = 0;
-  for (const line of data.split('\n')) {
-    const symbol = line.split('\t')[0];
+  for (const symbol of Object.keys(symbols)) {
     console.log(`${++index}: ${symbol}`);
     // if (fs.existsSync(`./downloads/${symbol}.csv`)) {
     //   console.log('Skipping...');
