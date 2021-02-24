@@ -13,33 +13,41 @@ const download = async (page: puppeteer.Page, symbol: string) => {
     fs.unlinkSync(filePath);
   }
   await page.click(downloadButtonSelector);
-  await waitFor({
+  const successful = await waitFor({
     interval: 100,
     condition: () => {
       return fs.existsSync(filePath);
     },
+    times: 600,
   });
+  if (!successful) {
+    throw new Error('Download timeout');
+  }
   fs.renameSync(filePath, `./downloads/${symbol}.csv`);
 };
 
 (async () => {
-  const browser = await puppeteer.launch({headless: false});
-  const page = await browser.newPage();
+  let browser = await puppeteer.launch({headless: false});
+  let page = await browser.newPage();
   const data = fs.readFileSync('./symbols.csv', 'utf-8');
+  let index = 0;
   for (const line of data.split('\n')) {
     const symbol = line.split('\t')[0];
-    console.log(symbol);
-    if (fs.existsSync(`./downloads/${symbol}.csv`)) {
-      console.log('Skipping...');
-      continue;
-    }
+    console.log(`${++index}: ${symbol}`);
+    // if (fs.existsSync(`./downloads/${symbol}.csv`)) {
+    //   console.log('Skipping...');
+    //   continue;
+    // }
     // eslint-disable-next-line no-constant-condition
     while (true) {
       try {
         await download(page, symbol);
         break;
       } catch (e) {
-        // do nothing
+        // restart browser
+        await browser.close();
+        browser = await puppeteer.launch({headless: false});
+        page = await browser.newPage();
       }
     }
   }
