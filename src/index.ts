@@ -25,7 +25,23 @@ const download = async (page: puppeteer.Page, symbol: string) => {
 (async () => {
   const browser = await puppeteer.launch({headless: false});
   const page = await browser.newPage();
-  await download(page, 'RNG');
-  await download(page, 'ZM');
+  const data = fs.readFileSync('./symbols.csv', 'utf-8');
+  for (const line of data.split('\n')) {
+    const symbol = line.split('\t')[0];
+    console.log(symbol);
+    if (fs.existsSync(`./downloads/${symbol}.csv`)) {
+      console.log('Skipping...');
+      continue;
+    }
+    // eslint-disable-next-line no-constant-condition
+    while (true) {
+      try {
+        await download(page, symbol);
+        break;
+      } catch (e) {
+        // do nothing
+      }
+    }
+  }
   await browser.close();
 })();
