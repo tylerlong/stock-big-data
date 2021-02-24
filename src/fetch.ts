@@ -24,7 +24,10 @@ const download = async (page: puppeteer.Page, symbol: string) => {
   if (!successful) {
     throw new Error('Download timeout');
   }
-  fs.renameSync(filePath, `./downloads/${symbol}.csv`);
+  fs.renameSync(
+    filePath,
+    path.join(__dirname, '..', 'downloads', `${symbol}.csv`)
+  );
 };
 
 (async () => {
@@ -33,7 +36,7 @@ const download = async (page: puppeteer.Page, symbol: string) => {
   let index = 0;
   for (const symbol of Object.keys(symbols)) {
     console.log(`${++index}: ${symbol}`);
-    // if (fs.existsSync(`./downloads/${symbol}.csv`)) {
+    // if (fs.existsSync(path.join(__dirname, '..', 'downloads', `${symbol}.csv`))) {
     //   console.log('Skipping...');
     //   continue;
     // }
