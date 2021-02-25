@@ -19,7 +19,7 @@ const download = async (page: puppeteer.Page, symbol: string) => {
     condition: () => {
       return fs.existsSync(filePath);
     },
-    times: 600,
+    times: 300,
   });
   if (!successful) {
     throw new Error('Download timeout');
@@ -36,10 +36,15 @@ const download = async (page: puppeteer.Page, symbol: string) => {
   let index = 0;
   for (const symbol of Object.keys(symbols)) {
     console.log(`${++index}: ${symbol}`);
-    // if (fs.existsSync(path.join(__dirname, '..', 'downloads', `${symbol}.csv`))) {
-    //   console.log('Skipping...');
-    //   continue;
-    // }
+
+    // skip downloaded
+    if (
+      fs.existsSync(path.join(__dirname, '..', 'downloads', `${symbol}.csv`))
+    ) {
+      console.log('Skipping...');
+      continue;
+    }
+
     // eslint-disable-next-line no-constant-condition
     while (true) {
       try {
