@@ -19,7 +19,7 @@ const download = async (page: puppeteer.Page, symbol: string) => {
     condition: () => {
       return fs.existsSync(filePath);
     },
-    times: 300,
+    times: 200,
   });
   if (!successful) {
     throw new Error('Download timeout');
@@ -30,9 +30,25 @@ const download = async (page: puppeteer.Page, symbol: string) => {
   );
 };
 
+const makeItFaster = async (page: puppeteer.Page) => {
+  await page.setRequestInterception(true);
+  page.on('request', req => {
+    if (
+      req.resourceType() === 'stylesheet' ||
+      req.resourceType() === 'font' ||
+      req.resourceType() === 'image'
+    ) {
+      req.abort();
+    } else {
+      req.continue();
+    }
+  });
+};
+
 (async () => {
   let browser = await puppeteer.launch({headless: false});
   let page = await browser.newPage();
+  await makeItFaster(page);
   let index = 0;
   for (const symbol of Object.keys(symbols)) {
     console.log(`${++index}: ${symbol}`);
@@ -55,6 +71,7 @@ const download = async (page: puppeteer.Page, symbol: string) => {
         await browser.close();
         browser = await puppeteer.launch({headless: false});
         page = await browser.newPage();
+        await makeItFaster(page);
       }
     }
   }
