@@ -3,6 +3,8 @@ import path from 'path';
 import R from 'ramda';
 import fs from 'fs';
 
+import dict from '../symbols.json';
+
 const files = glob.sync(path.join(__dirname, '..', 'downloads', '*.csv'));
 const symbols: any = {};
 for (const file of files) {
@@ -38,6 +40,7 @@ for (const symbol of Object.keys(symbols)) {
   const end = symbols[symbol][endDate];
   list.push({
     symbol,
+    name: (dict as any)[symbol],
     start,
     end,
     change: (end.close - start.close) / start.close,
