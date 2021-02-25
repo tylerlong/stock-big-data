@@ -25,7 +25,6 @@ for (const file of files) {
     };
   }
 }
-// console.log(symbols);
 
 const startDate = '20210219';
 const endDate = '20210224';
