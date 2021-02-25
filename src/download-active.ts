@@ -1,6 +1,6 @@
-import symbols from '../data/active.json';
-import {downloadAll} from './crawler';
+import {downloadAll, downloadActiveList} from './crawler';
 
 (async () => {
-  await downloadAll(Object.keys(symbols), true);
+  const symbols = await downloadActiveList();
+  await downloadAll(Object.keys(symbols), false);
 })();

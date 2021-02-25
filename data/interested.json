@@ -1,5 +1,26 @@
 {
   "RNG": "RingCentral",
   "ZM": "Zoom",
-  "TSM": "Taiwan Semiconductor Manufacturing"
+  "TSM": "Taiwan Semiconductor Manufacturing",
+  "AMD": "AMD",
+  "DOCU": "DocuSign",
+  "MSFT": "Microsoft",
+  "FB": "Facebook",
+  "AMZN": "Amazon",
+  "AAPL": "Apple",
+  "GOOGL": "Google",
+  "TSLA": "Tesla",
+  "COST": "Costco",
+  "BABA": "Alibaba",
+  "BIDU": "Baidu",
+  "TCEHY": "Tecent",
+  "JD": "JD.com",
+  "UBER": "Uber",
+  "PDD": "Pinduoduo",
+  "TWLO": "Twilio",
+  "NFLX": "Netflix",
+  "PYPL": "Paypal",
+  "SQ": "Square",
+  "NVDA": "NVIDIA",
+  "BILI": "Bilibili"
 }

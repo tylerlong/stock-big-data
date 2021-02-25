@@ -5,6 +5,7 @@ import os from 'os';
 import waitFor from 'wait-for-async';
 
 import Browser from './browser';
+import activeSymbols from '../data/active.json';
 
 export const downloadAll = async (symbols: string[], skip = true) => {
   let page = await Browser.newPage();
@@ -57,4 +58,28 @@ const downloadOne = async (page: puppeteer.Page, symbol: string) => {
     filePath,
     path.join(__dirname, '..', 'downloads', `${symbol}.csv`)
   );
+};
+
+export const downloadActiveList = async (): Promise<{
+  [symbol: string]: string;
+}> => {
+  const page = await Browser.newPage();
+  await page.goto(
+    'https://in.finance.yahoo.com/screener/predefined/most_actives'
+  );
+  await page.waitForSelector('table');
+  const text = await page.evaluate(
+    () => document.querySelector('table')!.innerText
+  );
+  await Browser.revoke();
+  const lines = text.split('\n');
+  const symbols: {[symbol: string]: string} = activeSymbols;
+  for (let i = 2; i < lines.length; i += 2) {
+    symbols[lines[i].trim()] = lines[i + 1].trim().split('\t')[0];
+  }
+  fs.writeFileSync(
+    path.join(__dirname, '..', 'data', 'active.json'),
+    JSON.stringify(symbols, null, 2)
+  );
+  return symbols;
 };
