@@ -1,6 +1,10 @@
 import {loadSymbols, highlight} from './utils';
 
-const symbols = loadSymbols();
-const startDate = '20210219';
-const endDate = '20210225';
-console.log(highlight(symbols, startDate, endDate));
+console.log(
+  highlight({
+    symbols: loadSymbols(),
+    startDate: '20210219',
+    endDate: '20210225',
+    take: 100,
+  })
+);

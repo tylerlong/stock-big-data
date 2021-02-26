@@ -46,28 +46,31 @@ export const loadHistory = (): History => {
   return history;
 };
 
-export const highlight = (
-  symbols: {[symbol: string]: string},
-  startDate: string,
-  endDate: string
-) => {
+export type HighlightOptions = {
+  symbols: {[symbol: string]: string};
+  startDate: string;
+  endDate: string;
+  take: number;
+};
+export const highlight = (options: HighlightOptions) => {
   const list = [];
   const history = loadHistory();
-  for (const symbol of Object.keys(symbols)) {
-    const start = history[symbol][startDate];
+  for (const symbol of Object.keys(options.symbols)) {
+    const start = history[symbol][options.startDate];
     if (start === undefined) {
       continue;
     }
-    const end = history[symbol][endDate];
+    const end = history[symbol][options.endDate];
     list.push({
       symbol,
-      name: symbols[symbol],
-      start,
-      end,
+      name: options.symbols[symbol],
+      start: start.close,
+      end: end.close,
       change: (end.close - start.close) / start.close,
+      link: `https://robinhood.com/stocks/${symbol}`,
     });
   }
 
   const result = R.reverse(R.sortBy(R.pipe(R.prop('change'), Math.abs))(list));
-  return R.take(10, result);
+  return R.take(options.take, result);
 };
