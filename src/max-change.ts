@@ -1,45 +1,23 @@
-import glob from 'glob';
-import path from 'path';
 import R from 'ramda';
-import fs from 'fs';
 
-import dict from '../symbols.json';
+import {loadHistory, loadSymbols} from './utils';
 
-const files = glob.sync(path.join(__dirname, '..', 'downloads', '*.csv'));
-const symbols: any = {};
-for (const file of files) {
-  console.log(file);
-  const symbol = R.last(file.split('/'))!.split('.')[0];
-  console.log(symbol);
-  const text = fs.readFileSync(file, 'utf-8');
-  symbols[symbol] = {};
-  for (const line of R.tail(text.split('\n'))) {
-    const tokens = line.split(',');
-    symbols[symbol][tokens[0].replace(/-/g, '')] = {
-      open: tokens[1],
-      high: tokens[2],
-      low: tokens[3],
-      close: tokens[4],
-      aClose: tokens[5],
-      volume: tokens[6],
-    };
-  }
-}
-
+const symbols = loadSymbols();
+const history = loadHistory();
 const startDate = '20210219';
-const endDate = '20210224';
+const endDate = '20210225';
 const list = [];
 
-for (const symbol of Object.keys(symbols)) {
+for (const symbol of Object.keys(history)) {
   console.log(symbol);
-  const start = symbols[symbol][startDate];
+  const start = history[symbol][startDate];
   if (start === undefined) {
     continue;
   }
-  const end = symbols[symbol][endDate];
+  const end = history[symbol][endDate];
   list.push({
     symbol,
-    name: (dict as any)[symbol],
+    name: symbols[symbol],
     start,
     end,
     change: (end.close - start.close) / start.close,
