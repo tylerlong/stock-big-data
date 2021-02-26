@@ -21,6 +21,7 @@ class Browser {
         req.continue();
       }
     });
+    page.setDefaultNavigationTimeout(999999999);
     return page;
   }
   static async revoke() {

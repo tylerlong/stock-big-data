@@ -4,8 +4,8 @@ import symbols from '../data/interested.json';
 console.log(
   highlight({
     symbols,
-    startDate: '20210219',
-    endDate: '20210225',
+    startDate: '20200226',
+    endDate: '20210226',
     take: 100,
   })
 );

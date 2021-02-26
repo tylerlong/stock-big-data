@@ -38,12 +38,12 @@ export const downloadAll = async (symbols: string[], skip = true) => {
 const downloadOne = async (page: puppeteer.Page, symbol: string) => {
   const downloadButtonSelector = `a[download="${symbol}.csv"]`;
   const filePath = path.join(os.homedir(), 'Downloads', `${symbol}.csv`);
-  await page.goto(`https://finance.yahoo.com/quote/${symbol}/history`);
+  page.goto(`https://finance.yahoo.com/quote/${symbol}/history`);
   await page.waitForSelector(downloadButtonSelector);
   if (fs.existsSync(filePath)) {
     fs.unlinkSync(filePath);
   }
-  await page.click(downloadButtonSelector);
+  page.click(downloadButtonSelector);
   const successful = await waitFor({
     interval: 100,
     condition: () => {

@@ -22,5 +22,7 @@
   "PYPL": "Paypal",
   "SQ": "Square",
   "NVDA": "NVIDIA",
-  "BILI": "Bilibili"
+  "BILI": "Bilibili",
+  "SPY": "SPDR S&P 500 ETF",
+  "SPYG": "SPDR Portfolio S&P 500 Growth ETF"
 }
