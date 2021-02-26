@@ -4,7 +4,8 @@
   "scripts": {
     "download-a": "ts-node src/download-active.ts",
     "download-i": "ts-node src/download-interested.ts",
-    "max": "ts-node src/max-change.ts"
+    "highlight-a": "ts-node src/highlight-all.ts",
+    "highlight-i": "ts-node src/highlight-interested.ts"
   },
   "dependencies": {
     "glob": "^7.1.6",

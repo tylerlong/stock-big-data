@@ -45,3 +45,29 @@ export const loadHistory = (): History => {
   }
   return history;
 };
+
+export const highlight = (
+  symbols: {[symbol: string]: string},
+  startDate: string,
+  endDate: string
+) => {
+  const list = [];
+  const history = loadHistory();
+  for (const symbol of Object.keys(symbols)) {
+    const start = history[symbol][startDate];
+    if (start === undefined) {
+      continue;
+    }
+    const end = history[symbol][endDate];
+    list.push({
+      symbol,
+      name: symbols[symbol],
+      start,
+      end,
+      change: (end.close - start.close) / start.close,
+    });
+  }
+
+  const result = R.reverse(R.sortBy(R.pipe(R.prop('change'), Math.abs))(list));
+  return R.take(10, result);
+};
