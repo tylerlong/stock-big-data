@@ -6,6 +6,7 @@ import waitFor from 'wait-for-async';
 
 import Browser from './browser';
 import activeSymbols from '../data/active.json';
+import blackList from '../data/blacklist.json';
 
 export const downloadAll = async (symbols: string[], skip = true) => {
   let page = await Browser.newPage();
@@ -83,5 +84,8 @@ export const downloadActiveList = async (): Promise<{
     path.join(__dirname, '..', 'data', 'active.json'),
     JSON.stringify(symbols, null, 2)
   );
+  for (const black of blackList) {
+    delete symbols[black];
+  }
   return symbols;
 };

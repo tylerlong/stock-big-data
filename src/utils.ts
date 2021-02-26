@@ -4,9 +4,14 @@ import R from 'ramda';
 
 import aSymbols from '../data/active.json';
 import iSymbols from '../data/interested.json';
+import blackList from '../data/blacklist.json';
 
 export const loadSymbols = (): {[symbol: string]: string} => {
-  return {...aSymbols, ...iSymbols};
+  const result: {[symbol: string]: string} = {...iSymbols, ...aSymbols};
+  for (const black of blackList) {
+    delete result[black];
+  }
+  return result;
 };
 
 export type History = {

@@ -4,7 +4,7 @@ console.log(
   highlight({
     symbols: loadSymbols(),
     startDate: '20210219',
-    endDate: '20210225',
+    endDate: '20210226',
     take: 100,
   })
 );
