@@ -73,6 +73,7 @@ export const highlight = (options: HighlightOptions) => {
       end: end.close,
       change: (end.close - start.close) / start.close,
       link: `https://robinhood.com/stocks/${symbol}`,
+      community: `https://finance.yahoo.com/quote/${symbol}/community`,
     });
   }
 
