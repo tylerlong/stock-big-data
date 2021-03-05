@@ -1,4 +1,4 @@
-import symbols from '../data/interested.json';
+import symbols from '../../data/interested.json';
 import {downloadAll} from './crawler';
 
 (async () => {

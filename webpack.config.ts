@@ -5,7 +5,7 @@ import HtmlWebpackPlugin from 'html-webpack-plugin';
 const config = {
   mode: 'production',
   devtool: 'source-map',
-  entry: './src/index.tsx',
+  entry: './src/web/index.tsx',
   output: {
     path: path.resolve(__dirname, 'docs'),
   },

@@ -3,9 +3,9 @@ import './index.css';
 import ReactDOM from 'react-dom';
 import React from 'react';
 
-import history from '../data/history.json';
-import {highlight} from './highlight';
-import symbols from './symbols';
+import history from '../../data/history.json';
+import {highlight} from '../highlight';
+import symbols from '../symbols';
 
 const highlighted = highlight(history, {
   symbols,

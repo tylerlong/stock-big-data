@@ -1,9 +1,7 @@
 import fs from 'fs';
 import path from 'path';
 
-import {loadHistory} from './utils';
-
-const history = loadHistory();
+import history from './history';
 
 fs.writeFileSync(
   path.join(__dirname, '..', 'data', 'history.json'),

@@ -5,8 +5,8 @@ import os from 'os';
 import waitFor from 'wait-for-async';
 
 import Browser from './browser';
-import activeSymbols from '../data/active.json';
-import blackList from '../data/blacklist.json';
+import activeSymbols from '../../data/active.json';
+import blackList from '../../data/blacklist.json';
 
 export const downloadAll = async (symbols: string[], skip = true) => {
   let page = await Browser.newPage();
