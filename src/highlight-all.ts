@@ -6,6 +6,6 @@ console.log(
     startDate: '20210219',
     endDate: '20210304',
     take: 100,
-    minMoneyAmount: 5000000000, // 5 billion
+    minMoneyAmount: 50000000000, // 50 billion
   })
 );

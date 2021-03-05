@@ -67,12 +67,24 @@ export const highlight = (options: HighlightOptions) => {
       continue;
     }
     const end = history[symbol][options.endDate];
-    if (
-      end.close * end.volume + start.close * start.volume <
-      options.minMoneyAmount
+
+    // filter by money amount
+    let moneyAmount = 0;
+    for (
+      let i = parseInt(options.startDate);
+      i <= parseInt(options.endDate);
+      i++
     ) {
+      const stockData = history[symbol][i.toString()];
+      if (!stockData) {
+        continue; // weekend and holiday
+      }
+      moneyAmount += stockData.close * stockData.volume;
+    }
+    if (moneyAmount < options.minMoneyAmount) {
       continue;
     }
+
     list.push({
       symbol,
       name: options.symbols[symbol],
