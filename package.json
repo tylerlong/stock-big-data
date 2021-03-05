@@ -11,7 +11,7 @@
     "highlight-i": "ts-node src/cli/highlight-interested.ts",
     "csv-to-json": "ts-node src/cli/csv-to-json.ts",
     "serve": "webpack serve --hot",
-    "release": "webpack --progress"
+    "release": "webpack --progress --mode production"
   },
   "dependencies": {
     "antd": "^4.13.0",
