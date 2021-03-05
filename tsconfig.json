@@ -4,9 +4,11 @@
     "outDir": "build",
     "resolveJsonModule": true,
     "esModuleInterop": true,
-    "lib": ["DOM"]
+    "lib": ["DOM"],
+    "jsx": "react",
   },
   "include": [
-    "src/**/*.ts"
+    "src/**/*.ts",
+    "src/**/*.tsx"
   ]
 }
