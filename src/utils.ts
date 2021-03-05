@@ -56,6 +56,7 @@ export type HighlightOptions = {
   startDate: string;
   endDate: string;
   take: number;
+  minMoneyAmount: number;
 };
 export const highlight = (options: HighlightOptions) => {
   const list = [];
@@ -66,6 +67,12 @@ export const highlight = (options: HighlightOptions) => {
       continue;
     }
     const end = history[symbol][options.endDate];
+    if (
+      end.close * end.volume + start.close * start.volume <
+      options.minMoneyAmount
+    ) {
+      continue;
+    }
     list.push({
       symbol,
       name: options.symbols[symbol],
