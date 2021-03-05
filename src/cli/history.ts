@@ -9,7 +9,7 @@ const history: History = {};
 for (const symbol of Object.keys(symbols)) {
   history[symbol] = {};
   const text = fs.readFileSync(
-    path.join(__dirname, '..', 'downloads', `${symbol}.csv`),
+    path.join(__dirname, '..', '..', 'downloads', `${symbol}.csv`),
     'utf-8'
   );
   for (const line of R.tail(text.split('\n'))) {

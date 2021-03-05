@@ -1,2 +1,3 @@
 --ignore-dir=docs
 --ignore-dir=data
+--ignore-file=match:/.*\.csv/

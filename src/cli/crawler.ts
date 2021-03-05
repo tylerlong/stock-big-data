@@ -16,7 +16,9 @@ export const downloadAll = async (symbols: string[], skip = true) => {
 
     if (skip) {
       if (
-        fs.existsSync(path.join(__dirname, '..', 'downloads', `${symbol}.csv`))
+        fs.existsSync(
+          path.join(__dirname, '..', '..', 'downloads', `${symbol}.csv`)
+        )
       ) {
         console.log('Skipping...');
         continue;
@@ -59,7 +61,7 @@ const downloadOne = async (page: puppeteer.Page, symbol: string) => {
   }
   fs.renameSync(
     filePath,
-    path.join(__dirname, '..', 'downloads', `${symbol}.csv`)
+    path.join(__dirname, '..', '..', 'downloads', `${symbol}.csv`)
   );
 };
 
@@ -81,7 +83,7 @@ export const downloadActiveList = async (): Promise<{
     symbols[lines[i].trim()] = lines[i + 1].trim().split('\t')[0];
   }
   fs.writeFileSync(
-    path.join(__dirname, '..', 'data', 'active.json'),
+    path.join(__dirname, '..', '..', 'data', 'active.json'),
     JSON.stringify(symbols, null, 2)
   );
   for (const black of blackList) {
