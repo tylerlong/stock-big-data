@@ -1,8 +1,9 @@
-import {highlight} from './utils';
+import {loadHistory} from './utils';
 import symbols from '../data/interested.json';
+import {highlight} from './highlight';
 
 console.log(
-  highlight({
+  highlight(loadHistory(), {
     symbols,
     startDate: '20210226',
     endDate: '20210301',

@@ -2,34 +2,11 @@ import path from 'path';
 import fs from 'fs';
 import R from 'ramda';
 
-import aSymbols from '../data/active.json';
-import iSymbols from '../data/interested.json';
-import blackList from '../data/blacklist.json';
-
-export const loadSymbols = (): {[symbol: string]: string} => {
-  const result: {[symbol: string]: string} = {...iSymbols, ...aSymbols};
-  for (const black of blackList) {
-    delete result[black];
-  }
-  return result;
-};
-
-export type History = {
-  [symbol: string]: {
-    [date: string]: {
-      open: number;
-      high: number;
-      low: number;
-      close: number;
-      aClose: number;
-      volume: number;
-    };
-  };
-};
+import {History} from './types';
+import symbols from './symbols';
 
 export const loadHistory = (): History => {
   const history: History = {};
-  const symbols = loadSymbols();
   for (const symbol of Object.keys(symbols)) {
     history[symbol] = {};
     const text = fs.readFileSync(
@@ -49,53 +26,4 @@ export const loadHistory = (): History => {
     }
   }
   return history;
-};
-
-export type HighlightOptions = {
-  symbols: {[symbol: string]: string};
-  startDate: string;
-  endDate: string;
-  take: number;
-  minMoneyAmount: number;
-};
-export const highlight = (options: HighlightOptions) => {
-  const list = [];
-  const history = loadHistory();
-  for (const symbol of Object.keys(options.symbols)) {
-    const start = history[symbol][options.startDate];
-    if (start === undefined) {
-      continue;
-    }
-    const end = history[symbol][options.endDate];
-
-    // filter by money amount
-    let moneyAmount = 0;
-    for (
-      let i = parseInt(options.startDate);
-      i <= parseInt(options.endDate);
-      i++
-    ) {
-      const stockData = history[symbol][i.toString()];
-      if (!stockData) {
-        continue; // weekend and holiday
-      }
-      moneyAmount += stockData.close * stockData.volume;
-    }
-    if (moneyAmount < options.minMoneyAmount) {
-      continue;
-    }
-
-    list.push({
-      symbol,
-      name: options.symbols[symbol],
-      start: start.close,
-      end: end.close,
-      change: (end.close - start.close) / start.close,
-      link: `https://robinhood.com/stocks/${symbol}`,
-      community: `https://finance.yahoo.com/quote/${symbol}/community`,
-    });
-  }
-
-  const result = R.reverse(R.sortBy(R.pipe(R.prop('change'), Math.abs))(list));
-  return R.take(options.take, result);
 };

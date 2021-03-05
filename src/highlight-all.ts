@@ -1,8 +1,10 @@
-import {loadSymbols, highlight} from './utils';
+import {loadHistory} from './utils';
+import {highlight} from './highlight';
+import symbols from './symbols';
 
 console.log(
-  highlight({
-    symbols: loadSymbols(),
+  highlight(loadHistory(), {
+    symbols,
     startDate: '20210219',
     endDate: '20210304',
     take: 100,
