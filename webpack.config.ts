@@ -3,7 +3,7 @@ import path from 'path';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 
 const config = {
-  mode: 'production',
+  mode: 'development',
   devtool: 'source-map',
   entry: './src/web/index.tsx',
   output: {
