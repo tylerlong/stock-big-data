@@ -6,7 +6,7 @@ body {
 
 div.slider {
   display: 'inline-block';
-  margin: 0 512px 0 128px;
+  margin: 0 128px 0 128px;
 }
 
 p.label {

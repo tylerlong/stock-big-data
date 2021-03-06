@@ -12,7 +12,7 @@ export const highlight = (history: History, options: HighlightOptions) => {
     const end = history[symbol][options.endDate];
 
     // filter by money amount
-    let moneyAmount = 0;
+    let transactionAmount = 0;
     for (
       let i = parseInt(options.startDate);
       i <= parseInt(options.endDate);
@@ -22,13 +22,15 @@ export const highlight = (history: History, options: HighlightOptions) => {
       if (!stockData) {
         continue; // weekend and holiday
       }
-      moneyAmount += stockData.close * stockData.volume;
+      transactionAmount += stockData.close * stockData.volume;
     }
     if (
-      moneyAmount < options.minTransaction ||
-      moneyAmount > options.maxTransaction
+      transactionAmount < options.minTransaction ||
+      transactionAmount > options.maxTransaction
     ) {
-      console.log(`${symbol}: ${Math.round(moneyAmount / 1000000000)} billion`);
+      console.log(
+        `${symbol}: ${Math.round(transactionAmount / 1000000000)} billion`
+      );
       continue;
     }
 
@@ -38,7 +40,9 @@ export const highlight = (history: History, options: HighlightOptions) => {
       start: start.close,
       end: end.close,
       change: (end.close - start.close) / start.close,
-      moneyAmount: `${Math.round(moneyAmount / 1000000000)} billion`,
+      transactionAmount: `${Math.round(
+        transactionAmount / 1000000000
+      )} billion`,
       link: `https://robinhood.com/stocks/${symbol}`,
       community: `https://finance.yahoo.com/quote/${symbol}/community`,
     });
