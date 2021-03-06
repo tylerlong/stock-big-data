@@ -16,6 +16,6 @@ export type HighlightOptions = {
   startDate: string;
   endDate: string;
   take: number;
-  minMoney: number;
-  maxMoney: number;
+  minTransaction: number;
+  maxTransaction: number;
 };

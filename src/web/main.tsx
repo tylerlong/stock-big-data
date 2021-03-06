@@ -11,8 +11,8 @@ class App extends React.Component<{}, any> {
     this.state = {
       startDate: '',
       endDate: '',
-      minMoney: 0,
-      maxMoney: 1000,
+      minTransaction: 0,
+      maxTransaction: 1000,
       highlighted: [],
     };
   }
@@ -27,8 +27,8 @@ class App extends React.Component<{}, any> {
         startDate: this.state.startDate.replace(/-/g, ''),
         endDate: this.state.endDate.replace(/-/g, ''),
         take: 100,
-        minMoney: this.state.minMoney * 1000000000,
-        maxMoney: this.state.maxMoney * 1000000000,
+        minTransaction: this.state.minTransaction * 1000000000,
+        maxTransaction: this.state.maxTransaction * 1000000000,
       }),
     });
   }
@@ -52,12 +52,7 @@ class App extends React.Component<{}, any> {
             });
           }}
         />
-        <br />
-        <br />
-        <div className="label">
-          <p className="alignLeft">Small Company</p>
-          <p className="alignRight">Big Company</p>
-        </div>
+        <p className="label">Transaction Amount (billion USD):</p>
         <div className="slider">
           <Slider
             range
@@ -65,8 +60,8 @@ class App extends React.Component<{}, any> {
             max={1000}
             step={10}
             defaultValue={[0, 1000]}
-            onAfterChange={([minMoney, maxMoney]) => {
-              this.setState({minMoney, maxMoney}, () => {
+            onAfterChange={([minTransaction, maxTransaction]) => {
+              this.setState({minTransaction, maxTransaction}, () => {
                 this.display();
               });
             }}

@@ -24,7 +24,10 @@ export const highlight = (history: History, options: HighlightOptions) => {
       }
       moneyAmount += stockData.close * stockData.volume;
     }
-    if (moneyAmount < options.minMoney || moneyAmount > options.maxMoney) {
+    if (
+      moneyAmount < options.minTransaction ||
+      moneyAmount > options.maxTransaction
+    ) {
       console.log(`${symbol}: ${Math.round(moneyAmount / 1000000000)} billion`);
       continue;
     }

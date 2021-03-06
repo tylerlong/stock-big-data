@@ -8,7 +8,7 @@ console.log(
     startDate: '20210219',
     endDate: '20210305',
     take: 100,
-    minMoney: 50 * 1000000000, // 50 billion
-    maxMoney: 1000 * 1000 * 1000000000, // 1000 trillion
+    minTransaction: 50 * 1000000000, // 50 billion
+    maxTransaction: 1000 * 1000 * 1000000000, // 1000 trillion
   })
 );
