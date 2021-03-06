@@ -1,1 +1,23 @@
 @import '~antd/dist/antd.css';
+
+body {
+  padding: 16px;
+}
+
+div.label {
+  margin: 0 382px 0 0;
+}
+div.slider {
+  display: 'inline-block';
+  margin: 0 512px 0 128px;
+}
+
+.alignLeft {
+  float: left;
+}
+.alignRight {
+  float: right;
+}
+div.clearBoth {
+  clear: both;
+}

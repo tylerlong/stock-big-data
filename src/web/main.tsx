@@ -1,5 +1,5 @@
 import React from 'react';
-import {DatePicker} from 'antd';
+import {DatePicker, Slider} from 'antd';
 
 import history from '../../data/history.json';
 import {highlight} from '../highlight';
@@ -11,6 +11,8 @@ class App extends React.Component<{}, any> {
     this.state = {
       startDate: '',
       endDate: '',
+      minMoney: 0,
+      maxMoney: 1000,
       highlighted: [],
     };
   }
@@ -25,7 +27,8 @@ class App extends React.Component<{}, any> {
         startDate: this.state.startDate.replace(/-/g, ''),
         endDate: this.state.endDate.replace(/-/g, ''),
         take: 100,
-        minMoneyAmount: 50000000000, // 50 billion
+        minMoney: this.state.minMoney * 1000000000,
+        maxMoney: this.state.maxMoney * 1000000000,
       }),
     });
   }
@@ -33,13 +36,15 @@ class App extends React.Component<{}, any> {
   render() {
     return (
       <>
+        From{' '}
         <DatePicker
           onChange={(date, dateString) => {
             this.setState({startDate: dateString}, () => {
               this.display();
             });
           }}
-        />
+        />{' '}
+        to{' '}
         <DatePicker
           onChange={(date, dateString) => {
             this.setState({endDate: dateString}, () => {
@@ -47,6 +52,27 @@ class App extends React.Component<{}, any> {
             });
           }}
         />
+        <br />
+        <br />
+        <div className="label">
+          <p className="alignLeft">Small Company</p>
+          <p className="alignRight">Big Company</p>
+        </div>
+        <div className="slider">
+          <Slider
+            range
+            min={0}
+            max={1000}
+            step={10}
+            defaultValue={[0, 1000]}
+            onAfterChange={([minMoney, maxMoney]) => {
+              this.setState({minMoney, maxMoney}, () => {
+                this.display();
+              });
+            }}
+          />
+        </div>
+        <div className="clearBoth"></div>
         <pre>
           <code>{JSON.stringify(this.state.highlighted, null, 2)}</code>
         </pre>

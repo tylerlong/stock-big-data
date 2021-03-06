@@ -8,6 +8,7 @@ console.log(
     startDate: '20210219',
     endDate: '20210305',
     take: 100,
-    minMoneyAmount: 50000000000, // 50 billion
+    minMoney: 50 * 1000000000, // 50 billion
+    maxMoney: 1000 * 1000 * 1000000000, // 1000 trillion
   })
 );

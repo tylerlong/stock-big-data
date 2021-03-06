@@ -24,7 +24,8 @@ export const highlight = (history: History, options: HighlightOptions) => {
       }
       moneyAmount += stockData.close * stockData.volume;
     }
-    if (moneyAmount < options.minMoneyAmount) {
+    if (moneyAmount < options.minMoney || moneyAmount > options.maxMoney) {
+      console.log(`${symbol}: ${Math.round(moneyAmount / 1000000000)} billion`);
       continue;
     }
 
@@ -34,6 +35,7 @@ export const highlight = (history: History, options: HighlightOptions) => {
       start: start.close,
       end: end.close,
       change: (end.close - start.close) / start.close,
+      moneyAmount: `${Math.round(moneyAmount / 1000000000)} billion`,
       link: `https://robinhood.com/stocks/${symbol}`,
       community: `https://finance.yahoo.com/quote/${symbol}/community`,
     });
