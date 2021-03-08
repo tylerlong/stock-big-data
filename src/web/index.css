@@ -12,3 +12,10 @@ div.slider {
 p.label {
   margin-top: 16px;
 }
+
+span.green {
+  color: green;
+}
+span.red {
+  color: red;
+}

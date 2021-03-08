@@ -1,8 +1,11 @@
 import * as R from 'ramda';
 
-import {History, HighlightOptions} from './types';
+import {History, HighlightOptions, HighlightItem} from './types';
 
-export const highlight = (history: History, options: HighlightOptions) => {
+export const highlight = (
+  history: History,
+  options: HighlightOptions
+): HighlightItem[] => {
   const list = [];
   for (const symbol of Object.keys(options.symbols)) {
     const start = history[symbol][options.startDate];

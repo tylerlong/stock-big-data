@@ -11,5 +11,4 @@ The list is from the [most active list](https://in.finance.yahoo.com/screener/pr
 ## Todo
 
 - Order by gain/loss/change/transaction
-- Update stock item UI
 - URL query parameters

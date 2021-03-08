@@ -4,6 +4,7 @@ import {DatePicker, Slider} from 'antd';
 import history from '../../data/history.json';
 import {highlight} from '../highlight';
 import symbols from '../symbols';
+import {HighlightItem} from '../types';
 
 class App extends React.Component<{}, any> {
   constructor(props: {}) {
@@ -68,21 +69,37 @@ class App extends React.Component<{}, any> {
           />
         </div>
         <div className="clearBoth"></div>
-        {this.state.highlighted.map((hi: any) => (
-          <Stock stock={hi} key={hi.symbol} />
+        {this.state.highlighted.map((hi: HighlightItem, index: number) => (
+          <Stock stock={hi} index={index} key={hi.symbol} />
         ))}
       </>
     );
   }
 }
 
-class Stock extends React.Component<any> {
+class Stock extends React.Component<{stock: HighlightItem; index: number}> {
   render() {
-    const {stock} = this.props;
+    const {stock, index} = this.props;
     return (
-      <pre>
-        <code>{JSON.stringify(stock, null, 2)}</code>
-      </pre>
+      <div>
+        <p>
+          {index + 1}.{' '}
+          <a href={stock.link} target="_blank" rel="noreferrer">
+            {stock.symbol} ({stock.name})
+          </a>
+          -{' '}
+          <a href={stock.community} target="_blank" rel="noreferrer">
+            community
+          </a>
+          <br />
+          from {stock.start.toFixed(2)} to {stock.end.toFixed(2)},{' '}
+          <span className={stock.change > 0 ? 'green' : 'red'}>
+            {stock.change > 0 ? '+' : ''}
+            {(stock.change * 100).toFixed(2)}%
+          </span>
+          , transaction amount is {stock.transactionAmount}
+        </p>
+      </div>
     );
   }
 }

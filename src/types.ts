@@ -19,3 +19,14 @@ export type HighlightOptions = {
   minTransaction: number;
   maxTransaction: number;
 };
+
+export type HighlightItem = {
+  symbol: string;
+  name: string;
+  start: number;
+  end: number;
+  change: number;
+  transactionAmount: string;
+  link: string;
+  community: string;
+};
