@@ -68,10 +68,21 @@ class App extends React.Component<{}, any> {
           />
         </div>
         <div className="clearBoth"></div>
-        <pre>
-          <code>{JSON.stringify(this.state.highlighted, null, 2)}</code>
-        </pre>
+        {this.state.highlighted.map((hi: any) => (
+          <Stock stock={hi} key={hi.symbol} />
+        ))}
       </>
+    );
+  }
+}
+
+class Stock extends React.Component<any> {
+  render() {
+    const {stock} = this.props;
+    return (
+      <pre>
+        <code>{JSON.stringify(stock, null, 2)}</code>
+      </pre>
     );
   }
 }
