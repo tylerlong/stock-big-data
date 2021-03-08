@@ -7,9 +7,10 @@
   "scripts": {
     "download-a": "ts-node src/cli/download-active.ts",
     "download-i": "ts-node src/cli/download-interested.ts",
+    "csv-to-json": "ts-node src/cli/csv-to-json.ts",
+    "download": "yarn download-a && yarn download-i && yarn csv-to-json",
     "highlight-a": "ts-node src/cli/highlight-all.ts",
     "highlight-i": "ts-node src/cli/highlight-interested.ts",
-    "csv-to-json": "ts-node src/cli/csv-to-json.ts",
     "serve": "webpack serve --hot",
     "release": "webpack --progress --mode production"
   },
