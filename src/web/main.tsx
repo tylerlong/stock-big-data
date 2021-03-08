@@ -92,12 +92,12 @@ class Stock extends React.Component<{stock: HighlightItem; index: number}> {
             community
           </a>
           <br />
-          from {stock.start.toFixed(2)} to {stock.end.toFixed(2)},{' '}
+          From ${stock.start.toFixed(2)} to ${stock.end.toFixed(2)},{' '}
           <span className={stock.change > 0 ? 'green' : 'red'}>
             {stock.change > 0 ? '+' : ''}
             {(stock.change * 100).toFixed(2)}%
           </span>
-          , transaction amount is {stock.transactionAmount}
+          , transaction amount is {stock.transactionAmount} USD.
         </p>
       </div>
     );
