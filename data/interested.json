@@ -24,5 +24,10 @@
   "NVDA": "NVIDIA",
   "BILI": "Bilibili",
   "SPY": "SPDR S&P 500 ETF",
-  "SPYG": "SPDR Portfolio S&P 500 Growth ETF"
+  "SPYG": "SPDR Portfolio S&P 500 Growth ETF",
+  "ARKK": "ARK Innovation ETF",
+  "ARKG": "ARK Genomic Revolution ETF",
+  "ARKF": "ARK Fintech Innovation ETF",
+  "ARKW": "ARK Next Generation Internet ETF",
+  "ARKQ": "ARK Autonomous Technology & Robotics ETF"
 }
