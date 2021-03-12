@@ -1,5 +1,5 @@
 import React from 'react';
-import {DatePicker, Slider} from 'antd';
+import {DatePicker, InputNumber} from 'antd';
 
 import history from '../../data/history.json';
 import {highlight} from '../highlight';
@@ -13,7 +13,7 @@ class App extends React.Component<{}, any> {
       startDate: '',
       endDate: '',
       minTransaction: 0,
-      maxTransaction: 1000,
+      maxTransaction: 10000,
       highlighted: [],
     };
   }
@@ -37,7 +37,7 @@ class App extends React.Component<{}, any> {
   render() {
     return (
       <>
-        From{' '}
+        Transaction Date: from{' '}
         <DatePicker
           onChange={(date, dateString) => {
             this.setState({startDate: dateString}, () => {
@@ -53,22 +53,32 @@ class App extends React.Component<{}, any> {
             });
           }}
         />
-        <p className="label">Transaction Amount (billion USD):</p>
-        <div className="slider">
-          <Slider
-            range
-            min={0}
-            max={1000}
-            step={10}
-            defaultValue={[0, 1000]}
-            onAfterChange={([minTransaction, maxTransaction]) => {
-              this.setState({minTransaction, maxTransaction}, () => {
-                this.display();
-              });
-            }}
-          />
-        </div>
-        <div className="clearBoth"></div>
+        <br />
+        <br />
+        Transaction Amount (billion USD): from{' '}
+        <InputNumber
+          min={0}
+          max={10000}
+          defaultValue={0}
+          onChange={minTransaction => {
+            this.setState({minTransaction}, () => {
+              this.display();
+            });
+          }}
+        />{' '}
+        to{' '}
+        <InputNumber
+          min={0}
+          max={10000}
+          defaultValue={10000}
+          onChange={maxTransaction => {
+            this.setState({maxTransaction}, () => {
+              this.display();
+            });
+          }}
+        />
+        <br />
+        <br />
         {this.state.highlighted.map((hi: HighlightItem, index: number) => (
           <Stock stock={hi} index={index} key={hi.symbol} />
         ))}
