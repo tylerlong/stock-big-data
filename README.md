@@ -12,3 +12,5 @@ The list is from the [most active list](https://in.finance.yahoo.com/screener/pr
 
 - Order by gain/loss/change/transaction
 - URL query parameters
+- filter by gain or loss
+- filter by keywords
