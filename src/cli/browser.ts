@@ -9,6 +9,15 @@ class Browser {
     }
     browser = await puppeteer.launch({headless: false});
     const page = await browser.newPage();
+
+    // Minimize Window
+    const session = await page.target().createCDPSession();
+    const {windowId} = await session.send('Browser.getWindowForTarget');
+    await session.send('Browser.setWindowBounds', {
+      windowId,
+      bounds: {windowState: 'minimized'},
+    });
+
     await page.setRequestInterception(true);
     page.on('request', req => {
       if (
@@ -22,8 +31,10 @@ class Browser {
       }
     });
     page.setDefaultNavigationTimeout(999999999);
+
     return page;
   }
+
   static async revoke() {
     if (browser !== undefined) {
       await browser.close();
